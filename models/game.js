@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
+<<<<<<< Updated upstream
 // Не забываем импортировать модель, на которую ссылаемся
+=======
+
+>>>>>>> Stashed changes
 const userModel = require('./user');
 const categoryModel = require('./category');
 
@@ -36,4 +40,11 @@ const gameSchema = new mongoose.Schema({
   }],
 });
 
+<<<<<<< Updated upstream
 module.exports = mongoose.model('game', gameSchema);
+=======
+module.exports = mongoose.model('game', gameSchema);
+
+/*const game = mongoose.model('game', gameSchema);
+module.exports = game*/
+>>>>>>> Stashed changes

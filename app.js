@@ -22,10 +22,6 @@ app.use(
   categoriesRouter
 );
 
-<<<<<<< Updated upstream
-app.listen(PORT);
-=======
 app.listen(PORT, () => {
   console.log(`Server is running at PORT http://localhost:${PORT}`);
 });
->>>>>>> Stashed changes

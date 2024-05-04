@@ -1,24 +1,10 @@
-<<<<<<< Updated upstream
-// Файл middlewares/users.js
-
-// Импортируем модель
 const users = require('../models/user');
 
 const findAllUsers = async (req, res, next) => {
-    // По GET-запросу на эндпоинт /users найдём все документы пользователей
-=======
-const users = require('../models/user');
-
-const findAllUsers = async (req, res, next) => {
->>>>>>> Stashed changes
   req.usersArray = await users.find({});
   next();
 }
 
-<<<<<<< Updated upstream
-// Экспортируем функцию поиска всех пользователей
-module.exports = findAllUsers;
-=======
 const findUserById = async (req, res, next) => {
   console.log("GET /users/:id");
   try {
@@ -69,4 +55,3 @@ const deleteUser= async (req, res, next) => {
 
 module.exports = { findAllUsers, createUser, findUserById, 
   updateUser, checkEmptyNameAndEmail, deleteUser };
->>>>>>> Stashed changes

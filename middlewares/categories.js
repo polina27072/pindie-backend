@@ -1,24 +1,10 @@
-<<<<<<< Updated upstream
-// Файл middlewares/categories.js
-
-// Импортируем модель
 const categories = require('../models/category');
 
 const findAllCategories = async (req, res, next) => {
-    // По GET-запросу на эндпоинт /categories найдём все документы категорий
-=======
-const categories = require('../models/category');
-
-const findAllCategories = async (req, res, next) => {
->>>>>>> Stashed changes
   req.categoriesArray = await categories.find({});
   next();
 }
 
-<<<<<<< Updated upstream
-// Экспортируем функцию поиска всех категорий
-module.exports = findAllCategories;
-=======
 const findCategoryById = async (req, res, next) => {
   console.log("GET /categories/:id");
   try {
@@ -70,4 +56,3 @@ const deleteCategory = async (req, res, next) => {
 
 module.exports = { findAllCategories, createCategory, 
   findCategoryById, updateCategory, checkEmptyName, deleteCategory };
->>>>>>> Stashed changes

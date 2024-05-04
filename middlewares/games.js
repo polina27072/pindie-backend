@@ -1,20 +1,3 @@
-<<<<<<< Updated upstream
-// Файл middlewares/games.js
-
-// Импортируем модель
-const games = require("../models/game");
-
-const findAllGames = async (req, res, next) => {
-  // По GET-запросу на эндпоинт /games найдём все документы категорий
-  // и с помощью метода populate запросим данные о связанных
-  // категориях и пользователях
-  req.gamesArray = await games.find({}).populate("categories").populate("users");
-  next();
-};
-
-// Экспортируем функцию поиска всех игр
-module.exports = findAllGames;
-=======
 const games = require("../models/game");
 
 const findAllGames = async (req, res, next) => {
@@ -45,7 +28,7 @@ const createGame = async (req, res, next) => {
     req.game = await games.create(req.body);
     next();
   } catch (error) {
-      res.status(400).send({ message: "Ошибка создания игры" });
+      res.status(400).send("Ошибка создания игры");
   }
 };
 
@@ -70,4 +53,3 @@ const deleteGame = async (req, res, next) => {
 };
 
 module.exports = { findAllGames, createGame, findGameById, updateGame, deleteGame };
->>>>>>> Stashed changes

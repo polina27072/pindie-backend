@@ -1,13 +1,3 @@
-<<<<<<< Updated upstream
-// Файл routes/games.js
-
-const gamesRouter = require('express').Router();
-
-const findAllGames = require('../middlewares/games');
-const sendAllGames = require('../controllers/games');
-
-gamesRouter.get('/games', findAllGames, sendAllGames);
-=======
 const gamesRouter = require('express').Router();
 
 const { findAllGames, createGame, findGameById, updateGame, deleteGame } = require('../middlewares/games');
@@ -33,6 +23,5 @@ gamesRouter.delete(
     deleteGame,
     sendGameDeleted 
   );
->>>>>>> Stashed changes
 
 module.exports = gamesRouter;

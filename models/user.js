@@ -16,7 +16,4 @@ const userSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('user', userSchema);
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes

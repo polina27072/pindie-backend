@@ -1,7 +1,7 @@
 const categoriesRouter = require('express').Router();
 
 const { findAllCategories, createCategory, updateCategory, 
-  checkEmptyName, deleteCategory } = require('../middlewares/categories');
+  checkEmptyName, deleteCategory, checkIsCategoryExists } = require('../middlewares/categories');
 const { sendAllCategories, sendCategoryCreated, sendCategoryUpdated, 
   sendCategoryDeleted } = require('../controllers/categories');
 
@@ -11,8 +11,9 @@ categoriesRouter.get('/categories', findAllCategories,
 categoriesRouter.post(
   "/categories",
   findAllCategories,
-  createCategory,
+  checkIsCategoryExists,
   checkEmptyName,
+  createCategory,
   sendCategoryCreated
 );
 

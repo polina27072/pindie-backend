@@ -22,7 +22,7 @@ const createCategory = async (req, res, next) => {
     req.category = await categories.create(req.body);
     next();
   } catch (error) {
-    res.status(400).send({ message:"Ошибка создания категории" });
+    res.status(400).send({ message: "Ошибка создания категории" });
   }
 };
 
@@ -54,5 +54,18 @@ const deleteCategory = async (req, res, next) => {
   }
 };
 
+const checkIsCategoryExists = async (req, res, next) => {
+  const isInArray = req.categoriesArray.find((category) => {
+    return req.body.name === category.name;
+  });
+  if (isInArray) {
+    res.setHeader("Content-Type", "application/json");
+        res.status(400).send(JSON.stringify({ message: "Категория с таким названием уже существует" }));
+  } else {
+    next();
+  }
+}; 
+
 module.exports = { findAllCategories, createCategory, 
-  findCategoryById, updateCategory, checkEmptyName, deleteCategory };
+  findCategoryById, updateCategory, checkEmptyName, 
+  deleteCategory, checkIsCategoryExists };

@@ -10,14 +10,21 @@ const sendCategoryCreated = (req, res) => {
 
 const sendCategoryUpdated = (req, res) => {
   res.setHeader("Content-Type", "application/json");
-  res.end({ message: "Игра обновлена" });
+  res.end({ message: "Категория обновлена" });
 };
 
 const sendCategoryDeleted = (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.end(JSON.stringify(req.category));
-  };
+};
 
-module.exports = { sendAllCategories, sendCategoryCreated, 
-  sendCategoryUpdated, sendCategoryDeleted };
+const sendCategoryById = (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(req.category));
+};
+
+module.exports = {
+  sendAllCategories, sendCategoryCreated,
+  sendCategoryUpdated, sendCategoryDeleted, sendCategoryById
+};
 

@@ -1,24 +1,16 @@
 const users = require('../models/user');
+const bcrypt = require("bcryptjs");
 
 const findAllUsers = async (req, res, next) => {
-  req.usersArray = await users.find({});
+  console.log("GET /api/users");
+  req.usersArray = await users.find({}, { password: 0 });
   next();
-}
-
-const findUserById = async (req, res, next) => {
-  console.log("GET /users/:id");
-  try {
-    req.user = await users.findById(req.params.id);
-    next();
-  } catch (error) {
-        res.status(404).send({ message: "Пользователь не найден" });
-  }
 };
 
 const createUser = async (req, res, next) => {
   console.log("POST /users");
   try {
-    //console.log(req.body);
+    console.log(req.body);
     req.user = await users.create(req.body);
     next();
   } catch (error) {
@@ -26,7 +18,18 @@ const createUser = async (req, res, next) => {
   }
 };
 
+const findUserById = async (req, res, next) => {
+  console.log("GET /api/users/:id");
+  try {
+    req.user = await users.findById(req.params.id, { password: 0 });
+    next();
+  } catch (error) {
+        res.status(404).send({ message: "Пользователь не найден" });
+  }
+};
+
 const updateUser = async (req, res, next) => {
+  console.log("PUT /users/:id");
   try {
       req.user = await users.findByIdAndUpdate(req.params.id, req.body);
     next();
@@ -38,7 +41,7 @@ const updateUser = async (req, res, next) => {
 const checkEmptyNameAndEmailAndPassword = async (req, res, next) => {
   if (!req.body.username || !req.body.email || !req.body.password) {
     res.setHeader("Content-Type", "application/json");
-        res.status(400).send(JSON.stringify({ message: "Введите имя, email и пароль" }));
+        res.status(400).send({ message: "Введите имя, email и пароль" });
   } else {
     next();
   }
@@ -68,12 +71,31 @@ const checkIsUserExists = async (req, res, next) => {
   });
   if (isInArray) {
     res.setHeader("Content-Type", "application/json");
-        res.status(400).send(JSON.stringify({ message: "Пользователь с таким email уже существует" }));
+        res.status(400).send({ message: "Пользователь с таким email уже существует" });
   } else {
     next();
   }
 };
 
-module.exports = { findAllUsers, createUser, findUserById, 
-  updateUser, checkEmptyNameAndEmailAndPassword, checkEmptyNameAndEmail, 
-  deleteUser, checkIsUserExists };
+const hashPassword = async (req, res, next) => {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(req.body.password, salt);
+    req.body.password = hash;
+    next();
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ message: "Ошибка хеширования пароля" });
+  }
+};
+
+module.exports = { 
+  findAllUsers, 
+  createUser, 
+  findUserById, 
+  updateUser, 
+  checkEmptyNameAndEmailAndPassword, 
+  checkEmptyNameAndEmail, 
+  deleteUser, 
+  checkIsUserExists,
+  hashPassword };

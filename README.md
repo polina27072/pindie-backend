@@ -1,1 +1,5 @@
-Мой бэкенд:polina-backend.nomoredomainswork.ru
+Ссылка на репозиторий с фронтендом: https://github.com/polina27072/pindie-my-app/pull/2
+
+Ссылка на домен фронтенда: https://polina-frontend.nomoredomainswork.ru
+
+IP-адрес: 158.160.162.10
